@@ -1,0 +1,90 @@
+<%- include('../partials/header'); -%>
+
+    <!-- Page Contents -->
+    <main role="main" class="flex-shrink-0">
+      <div class="container">
+
+        <section class="jumbotron">
+          <!-- START: Title -->
+          <h1><i class="fas fa-campground"></i> Yelp Campgrounds</h1>
+          <p>View and share awesome campgrounds around the world!</p>
+          <!-- END: Title -->
+          <!-- START: Search Box -->
+          <form class="form" action="/campgrounds" method="GET">
+            <div class="form-group">
+              <input id="camp-search" class="form-control" type="text" name="search" placeholder="Search Campgrounds" autocomplete="off" />
+              <label for="search">Search Campgrounds</label>
+            </div>
+          </form>
+          <!-- END: Search Box -->
+        </section>
+
+        <!-- START: Campground List -->
+        <section class="row">
+
+          <!-- START: Search Status -->
+          <% if (noMatch !== null) {%>
+          <div class="col-md-12">
+            <h5><%= noMatch %></h5>
+          </div>
+          <% } %>
+          <!-- END: Search Status -->
+
+          <!-- START: Campground Card -->
+          <% campgrounds.forEach(function(campground){ %>
+          <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+              <!-- START: Campground Image -->
+              <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="<%= campground.image.url %>"preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/>
+              <!-- END: Campground Image -->
+              <!-- START: Campground Information -->
+              <div class="card-body">
+                <!-- START: Campground Name -->
+                <p class="card-text"><%= campground.name %></p>
+                <!-- END: Campground Name -->
+                <div class="d-flex justify-content-between align-items-center">
+                  <!-- START: Campground Buttons -->
+                  <div class="btn-group">
+                    <!-- START: Like Button -->
+                    <form action="/campgrounds/<%= campground._id %>/likes" method="POST">
+                    <% if (currentUser && campground.likes.some(function (like) {
+                      return like.equals(currentUser._id)
+                    })) { %>
+                      <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-thumbs-up"></i> Like
+                      </button>
+                    <% } else { %>
+                      <button class="btn btn-sm btn-secondary">
+                        <i class="fas fa-thumbs-up"></i> Like
+                      </button>
+                    <% } %>
+                    </form>
+                    <!-- End: Like Button -->
+                    <!-- START: View Button -->
+                    <form class="inline-form" action="/campgrounds/<%= campground._id %>" method="GET">
+                      <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-mountain"></i> View</button>
+                    </form>
+                    <!-- END: View Button -->
+                    
+                  </div>
+                  <!-- END: Campground Buttons -->
+                  <!-- START: Campground Author -->
+                  <small class="text-muted"><%= "@" + campground.author.username %></small>
+                  <!-- END: Campground Author -->
+                </div>
+              </div>
+              <!-- END: Campground Information -->
+            </div>
+
+          </div>
+
+          <% }); %>
+          <!-- END: Campground Card -->
+
+        </section>
+        <!-- END: Campground List -->
+
+      </div>
+    </main>
+
+<%- include('../partials/footer'); -%>

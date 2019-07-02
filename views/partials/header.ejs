@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Hsins">
+    <title>Yelp Camp</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+    <script src="https://kit.fontawesome.com/146193c168.js"></script>
+  </head>
+
+  <div class="container">
+    <% if (error && error.length > 0) {%>
+    <div class="alert alert-danger" role="alert">
+      <%= error %>
+    </div>
+    <% } %>
+    <% if (success && success.length > 0) {%>
+    <div class="alert alert-success" role="alert">
+      <%= success %>
+    </div>
+    <% } %>
+  </div>
+
+  <body class="d-flex flex-column h-100">
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="/">
+          <img src="/img/favicon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarToggle">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item <%= typeof page !== 'undefined' && page === 'campgrounds' ? 'active' : '' %>">
+              <a class="nav-link" href="/campgrounds">Campgrounds</a>
+            </li>
+            <li class="nav-item <%= typeof page !== 'undefined' && page === 'users' ? 'active' : '' %>">
+              <a class="nav-link" href="/users">Members</a>
+            </li>
+          </ul>
+          <% if (!currentUser) { %>
+          <a class="btn btn-info btn-space" href="/login"><i class="far fa-paper-plane">&nbsp;</i>Login</a>
+          <a class="btn btn-outline-info btn-space" href="/register"><i class="fas fa-chevron-circle-up">&nbsp;</i>Register</a>
+          <% } else { %>
+          <a class="btn btn-outline-light btn-space" href="/campgrounds/new"><i class="fas fa-plus"></i> New</a>
+          <a class="btn btn-outline-light btn-space" href="/users/<%= currentUser._id %>"><i class="fas fa-user"></i> Profile</a>
+          <form action="/sessions/?_method=DELETE" method="POST"><button class="btn btn-outline-light btn-space" type="submit"><i class="fas fa-sign-out-alt"></i> Logout</button></form>
+          <% } %>
+        </div>
+      </nav>
+    </header>

@@ -1,0 +1,48 @@
+<%- include('../partials/header'); -%>
+
+    <!-- Page Contents -->
+    <main class="container">
+      <form class="login-register" action="/users" method="POST" enctype="multipart/form-data">
+        
+        <div class="text-center mb-4">
+          <img class="mb-4" src="/img/user.png" alt="" width="100" height="100">
+          <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+        </div>
+
+        <div class="form-group">
+          <input id="username" class="form-control" pattern="^[A-Za-z0-9]+$" title="May only contain a-z and 0-9" type="text" name="username" placeholder="Username (case sensitive)" required autofocus>
+          <label for="username">Username (case sensitive)</label>
+        </div>
+       
+        <div class="form-group">
+          <input id="password" class="form-control" type="password" name="password" placeholder="Password (case sensitive)" required>
+          <label for="password">Password (case sensitive)</label>
+        </div>
+
+        <div class="form-group">
+          <input id="email" class="form-control" type="email" name="email" placeholder="Email Address" required>
+          <label for="email">Email Address</label>
+        </div>
+
+        <div class="form-group">
+          <input id="first-name" class="form-control" type="text" name="firstName" placeholder="First Name" required>
+          <label for="first-name">First Name</label>
+        </div>
+
+        <div class="form-group">
+          <input id="last-name" class="form-control" type="text" name="lastName" placeholder="Last Name" required>
+          <label for="last-name">Last Name</label>
+        </div>
+
+        <div class="form-group">
+          <input id="campground-image" class="form-control" type="file" accept="image/*" name="image" autocomplete="off">
+          <label for="campground-image">Avatar</label>
+        </div>
+        
+        <button class="btn btn-lg btn-secondary btn-block" type="submit">Sign up</button>
+        <a href="/explore"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Go Back</a>
+
+      </form>
+    </main>
+
+<%- include('../partials/footer'); -%>
