@@ -23,7 +23,7 @@
     "connect-flash": "^0.1.1",
     "datauri": "^2.0.0",
     "ejs": "^2.6.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-sanitizer": "^1.0.5",
     "express-session": "^1.16.2",
     "helmet": "^3.18.0",
